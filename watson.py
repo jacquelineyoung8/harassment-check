@@ -33,7 +33,7 @@ def checkForRacialSlurs(text):
 					if word == row[0].lower(): #compare word in text string to a racial discriminatory word
 						bad_words.append(word)
 	if len(bad_words) > 1: 
-	bad_words[0] = True 
+		bad_words[0] = True 
 	return bad_words
 
 
@@ -46,14 +46,39 @@ def findDisgustedAngry(text):
 	else: 
 		return False
 
+def createDict():
+	advice_dict = {}
+	with open('our_advice.tsv', 'rb') as advice:
+		for line in advice: 
+			line_dict = line.split("	")
+			advice_dict[line_dict[0]] = line_dict[1]
+	return advice_dict
+
 def everything(text):
-	if findDisgustedAngry(text): 
-  		print (text + " seems angry and disgusted")
-  	if checkForBadWords(text)[0]:
-  		print (text + " contains some bad words")
+	# if findDisgustedAngry(text): 
+ #  		print (text + " seems angry and disgusted")
+ #  	if checkForBadWords(text)[0]:
+ #  		print (text + " contains some bad words")
+ 	my_advice = createDict()
+ 	all_bad = []
+ 	racial_slurs = checkForRacialSlurs(text)
+ 	bad_words = checkForBadWords(text)
+ 	both_lists = racial_slurs + bad_words
+ 	for bad_word in both_lists: 
+ 		if bad_word != True or bad_word != False: 
+ 			all_bad.append(bad_word)
+ 	for word in all_bad: 
+ 		if word in my_advice.keys(): 
+ 			return my_advice[word]
+
+print everything('you are a slut')
+
+
+
+
 
 #everything("you're a dumb slut")
-print checkForRacialSlurs("fsdf ")
+
 
 
 
