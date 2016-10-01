@@ -3,9 +3,20 @@
   <head>
     <title>Anti-troll Harassment Checker</title>
     <script src="popup.js"></script>
+    <link href="style.css" rel="stylesheet">
   </head>
-  <body>
-    <h1>Anti-troll Harassment Checker</h1>
-    <button id="checkPage">Check this page now!</button>
-  </body>
+  <form>
+  	<h1 class="header"> ANTI-TROLL ++ </h1>
+  	<div id="input_text">
+  	<p> Input your text </p>
+    <input id="message_text" this.value = ''" type="text-box" maxlength="10000" name="message_text"> </br> </br>
+    <button id="checkPage">Check your text's emotions</button> </br>
+    <!-- TODO: send this to Watson -->
+    </div>
+
+    <div id="results">
+    <!-- TODO: put Watson results here -->
+    </div>
+  
+  </form>
 </html>
