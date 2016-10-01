@@ -5,6 +5,8 @@ from watson_developer_cloud import AlchemyLanguageV1
 
 
 def checkForBadWords(text):
+	'''returns a list w/ the zeroth element as True (for containing a bad word) and False for not containing a bad word, 
+	if True, the list will also contain the bad words that occured in the text'''
 	text_list = text.split()
 	bad_words = []
 	bad_words.append(False) #0th element is true or false, the rest are the bad words 
@@ -19,21 +21,39 @@ def checkForBadWords(text):
 		bad_words[0] = True 
 	return bad_words
 
-mean_tweets = ["you are such a dumb shit", "crooked hillary is not qualified to be president", "oriental women are more attractive", "black men are more dangerous", "dogs are better than cats"]
 
-bad_tweets = []
-for tweet in mean_tweets:
+def checkForRacialSlurs(text): 
+	text_list = text.split()
+	bad_words = []
+	bad_words.append(False) #0th element is true or false, the rest are the bad words 
+	with open('racial_slurs.csv', 'rb') as csvfile:
+			reader = csv.reader(csvfile)
+			for row in reader: 
+				for word in text_list: 
+					if word == row[0].lower(): #compare word in text string to a racial discriminatory word
+						bad_words.append(word)
+	if len(bad_words) > 1: 
+	bad_words[0] = True 
+	return bad_words
+
+
+def findDisgustedAngry(text): 
+	'''returns true if the text is disgusted and angry'''
 	alchemy_language = AlchemyLanguageV1(api_key='352784ebf5a02644225cb5eda97e76da20788915')
-	response = json.dumps(
-  alchemy_language.emotion(
-    text=tweet),
-  indent=2)
+	response = alchemy_language.emotion(text=text)
+	if float(response["docEmotions"]["anger"])> 0.25 and float(response["docEmotions"]["disgust"]) > 0.25: 
+		return True
+	else: 
+		return False
 
-	response =json.loads(response)
-# 	if float(response["docEmotions"]["anger"])> 0.25 or float(response["docEmotions"]["disgust"]) > 0.25: 
-# 		bad_tweets.append(tweet)
-# print bad_tweets
-	print tweet 
-	print checkForBadWords(tweet)
+def everything(text):
+	if findDisgustedAngry(text): 
+  		print (text + " seems angry and disgusted")
+  	if checkForBadWords(text)[0]:
+  		print (text + " contains some bad words")
+
+#everything("you're a dumb slut")
+print checkForRacialSlurs("fsdf ")
+
 
 
