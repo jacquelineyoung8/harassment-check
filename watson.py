@@ -64,7 +64,7 @@ def findDisgustedAngry(text):
 	'''returns true if the text is disgusted and angry'''
 	alchemy_language = AlchemyLanguageV1(api_key='352784ebf5a02644225cb5eda97e76da20788915')
 	response = alchemy_language.emotion(text=text)
-	if float(response["docEmotions"]["anger"])> 0.30 and float(response["docEmotions"]["disgust"]) > 0.30: 
+	if float(response["docEmotions"]["anger"])> 0.25 and float(response["docEmotions"]["disgust"]) > 0.25: 
 		return True
 	else: 
 		return False
@@ -93,14 +93,18 @@ def allChecks(text):
  			all_bad.append(bad_word)
  	for word in all_bad: 
  		if word in my_advice.keys(): 
+ 			response["isOK"] = False
  			response["advice"] = my_advice[word]
- 			return response
+ 			return response["advice"]
 
  	if findDisgustedAngry(text) or len(all_bad)> 0: # for case w/ swear word not in dictionary or disgusted/angry tone
+ 		response["isOK"] = False
  		response["advice"] = "Your tone seems inappropriate for this situation. You might want to try rephrasing"
+
  	else:
+ 		response["isOK"] = True
  		response["advice"] = "This looks good to me"
- 	return response
+ 	return response["advice"]
 	
 if __name__ == "__main__":
     app.run('0.0.0.0')

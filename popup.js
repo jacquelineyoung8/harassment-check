@@ -7,6 +7,11 @@ document.addEventListener('DOMContentLoaded', function() {
        if (this.readyState == 4 && this.status == 200) {
             //console.log(this.responseText);
             document.getElementById('input_text').innerHTML = this.responseText;
+            document.getElementById('input_text').style.fontFamily="Baskerville"
+            document.getElementById('input_text').style.fontWeight="bold"
+            document.getElementById('input_text').style.fontSize="16px"
+
+
 
    }
  };

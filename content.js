@@ -21,6 +21,7 @@ function updatePhrase(e){
     	xhttp.onreadystatechange = function() {
     	if (this.readyState == 4 && this.status == 200) {
      		console.log(this.responseText);
+        // window.alert(this.responseText)
     	};
   	};
   xhttp.open("POST", "http://localhost:5000/analyze", true);

@@ -1,6 +1,7 @@
 body {
   background-color: #E4F1E2;
   margin: 3px;
+  width: 200px;
 }
 
 h1 {
@@ -12,7 +13,18 @@ h1 {
   letter-spacing:4px;
 }
 
-h1, p, button, input, select, textarea {
+div #input_text {
+  color: "pink";
+}
+
+input {
+  position: relative;
+  left: 50%;
+  margin-left: -65px;
+}
+
+h1, p, button, select, textarea {
+  text-align: center;
   color:#6AB15D;
   margin-left: 2%;
   font-family : inherit;
