@@ -4,13 +4,13 @@
 // }, false);
 
 var phrase = "";
+var timeoutVar;
 
 function updatePhrase(e){
-  console.log("----------");
-  var key = e.key;
-  console.log("before: "+ phrase);
-  phrase += key;
-  console.log("after: "+phrase);
+	if (timeoutVar) {
+		clearTimeout(timeoutVar);
+	}
+	timeoutVar = setTimeout(function(){alert("hello");}, 500);  
 };
 
 function backspace(e){
@@ -23,6 +23,9 @@ function backspace(e){
 document.addEventListener("keypress", updatePhrase, false);
 document.addEventListener("keydown", backspace, false);
 
-chrome.runtime.sendMessage({harassing-content: phrase}, function(response) {
-  console.log("request sent");
-});
+
+// console.log("----------");
+//   var key = e.key;
+//   console.log("before: "+ phrase);
+//   phrase += key;
+//   console.log("after: "+phrase);
