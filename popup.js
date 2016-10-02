@@ -6,3 +6,4 @@ document.addEventListener('DOMContentLoaded', function() {
 
 document.getElementById("submitText").addEventListener("click", checkPhrase, false);
 });
+
