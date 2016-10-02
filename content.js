@@ -10,7 +10,13 @@ function updatePhrase(e){
 	if (timeoutVar) {
 		clearTimeout(timeoutVar);
 	}
-	timeoutVar = setTimeout(function(){alert("hello");}, 500);  
+	timeoutVar = setTimeout(function(){
+		var xhttp = new XMLHttpRequest();
+    	xhttp.onreadystatechange = function() {
+    	if (this.readyState == 4 && this.status == 200) {
+     		console.log(this.responseText);
+    	}
+	}, 500);  
 };
 
 function backspace(e){
