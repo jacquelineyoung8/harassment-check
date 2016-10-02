@@ -5,8 +5,14 @@
 
 var phrase = "";
 var timeoutVar;
-
+ // var key = e.key;
+ // console.log("before: "+ phrase);
+ // phrase += key;
+ // console.log("after: "+phrase);
 function updatePhrase(e){
+  var key = e.key;
+  // console.log("before: "+ phrase);
+  phrase += key;
 	if (timeoutVar) {
 		clearTimeout(timeoutVar);
 	}
@@ -15,12 +21,11 @@ function updatePhrase(e){
     	xhttp.onreadystatechange = function() {
     	if (this.readyState == 4 && this.status == 200) {
      		console.log(this.responseText);
-        document.getElementById('message_text').innerHTML = this.ResponseText;
     	};
   	};
   xhttp.open("POST", "http://localhost:5000/analyze", true);
   xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-  xhttp.send("inputtext=slut");
+  xhttp.send("inputtext="+phrase);
   }, 500);  
 
 };
@@ -37,7 +42,7 @@ document.addEventListener("keypress", updatePhrase, false);
 
 
 // console.log("----------");
-//   var key = e.key;
-//   console.log("before: "+ phrase);
-//   phrase += key;
-//   console.log("after: "+phrase);
+  // var key = e.key;
+ // console.log("before: "+ phrase);
+  // phrase += key;
+ // console.log("after: "+phrase);
