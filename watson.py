@@ -23,8 +23,8 @@ def index():
 
 @app.route("/analyze", methods=["POST"])
 def analyze():
-	print allChecks(request.form['input_text'])
-	return jsonify(allChecks(request.form['input_text']))
+	print allChecks(request.form['inputtext'])
+	return jsonify(allChecks(request.form['inputtext']))
 
 
 def checkForBadWords(text):
