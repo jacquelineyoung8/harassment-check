@@ -5,7 +5,6 @@
 
 var phrase = "";
 
-
 function updatePhrase(e){
   console.log("----------");
   var key = e.key;
@@ -23,3 +22,7 @@ function backspace(e){
 
 document.addEventListener("keypress", updatePhrase, false);
 document.addEventListener("keydown", backspace, false);
+
+chrome.runtime.sendMessage({harassing-content: phrase}, function(response) {
+  console.log("request sent");
+});
