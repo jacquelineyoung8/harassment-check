@@ -64,7 +64,7 @@ def findDisgustedAngry(text):
 	'''returns true if the text is disgusted and angry'''
 	alchemy_language = AlchemyLanguageV1(api_key='352784ebf5a02644225cb5eda97e76da20788915')
 	response = alchemy_language.emotion(text=text)
-	if float(response["docEmotions"]["anger"])> 0.25 and float(response["docEmotions"]["disgust"]) > 0.25: 
+	if float(response["docEmotions"]["anger"])> 0.30 and float(response["docEmotions"]["disgust"]) > 0.30: 
 		return True
 	else: 
 		return False
@@ -89,20 +89,22 @@ def allChecks(text):
  	bad_words = checkForBadWords(text)
  	both_lists = racial_slurs + bad_words
  	for bad_word in both_lists: 
- 		if bad_word != True or bad_word != False: 
+ 		if bad_word != True and bad_word != False: 
  			all_bad.append(bad_word)
+
  	for word in all_bad: 
  		if word in my_advice.keys(): 
- 			response["isOK"] = False
+ 			#response["isOK"] = False
  			response["advice"] = my_advice[word]
+ 			print word
  			return response["advice"]
 
- 	if findDisgustedAngry(text) or len(all_bad)> 0: # for case w/ swear word not in dictionary or disgusted/angry tone
- 		response["isOK"] = False
+ 	#print (all_bad)
+ 	if findDisgustedAngry(text) or len(all_bad) > 0: # for case w/ swear word not in dictionary or disgusted/angry tone
+ 		#response["isOK"] = False
  		response["advice"] = "Your tone seems inappropriate for this situation. You might want to try rephrasing"
-
  	else:
- 		response["isOK"] = True
+ 		#response["isOK"] = True
  		response["advice"] = "This looks good to me"
  	return response["advice"]
 	
@@ -110,12 +112,12 @@ if __name__ == "__main__":
     app.run('0.0.0.0')
 
 
+#print allChecks("girls are really bad at math and stupid")
+# print allChecks("you are a dumb slut")
+# print allChecks("i love fluffy dogs")
 
-#print allChecks("you are a bad evil person")
 
-
-
-#everything("you're a dumb slut")
+# print allChecks("you're a fluffy stupid cat")
 
 
 
