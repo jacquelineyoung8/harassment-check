@@ -15,20 +15,25 @@ function updatePhrase(e){
     	xhttp.onreadystatechange = function() {
     	if (this.readyState == 4 && this.status == 200) {
      		console.log(this.responseText);
+        document.getElementById('message_text').innerHTML = this.ResponseText;
     	};
   	};
+  xhttp.open("POST", "http://localhost:5000/analyze", true);
+  xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+  xhttp.send("inputtext=slut");
   }, 500);  
+
 };
 
-function backspace(e){
-  if (e.keyCode == 8 || e.keyCode == 46){
-    phrase = phrase.slice(0, phrase.length - 1);
-    console.log("phrase is: " + phrase);
-  }
-};
+// function backspace(e){
+//   if (e.keyCode == 8 || e.keyCode == 46){
+//     phrase = phrase.slice(0, phrase.length - 1);
+//     console.log("phrase is: " + phrase);
+//   }
+// };
 
 document.addEventListener("keypress", updatePhrase, false);
-document.addEventListener("keydown", backspace, false);
+// document.addEventListener("keydown", backspace, false);
 
 
 // console.log("----------");
